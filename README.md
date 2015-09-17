@@ -3,7 +3,7 @@ Automata simulator written in Python
 
 ## How to test
 
-### 1. Requirments
+### 1. Requirements
 * Python 3
 * PyCharm
 
