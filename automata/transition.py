@@ -14,6 +14,9 @@ class Transition():
         assert state in self.states and symbol in self.vocabulary
         row = self.states.index(state) + 1
         column = self.vocabulary.index(symbol) + 1
+        output = self.table[row][column]
+        if output == '':
+            return None
         return self.table[row][column]
 
     def initialize(self, data):
@@ -28,6 +31,6 @@ class Transition():
     def isValidTransition(self, states, table):
         for line in table[1:]:
             for state in line[1:]:
-                if state not in states:
+                if not(state == '' or state in states):
                     return False
         return True

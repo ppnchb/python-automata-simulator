@@ -28,5 +28,8 @@ class DFA():
         for symbol in string:
             if symbol not in self.vocabulary:
                 return False
-            currentState = self.transition(currentState, symbol)
+            nextState = self.transition(currentState, symbol)
+            if nextState is None:
+                return False
+            currentState = nextState
         return currentState in self.finalState
