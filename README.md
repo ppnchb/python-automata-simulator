@@ -7,7 +7,7 @@ Automata simulator written in Python
 
 ## Supported automata types
 * Deterministic finite automata
-* Deterministic ainite automata with partial function
+* Deterministic finite automata with partial function
 
 ## How to use
 
