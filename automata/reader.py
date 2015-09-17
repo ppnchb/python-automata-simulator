@@ -1,0 +1,24 @@
+__author__ = 'Hyunsoo'
+
+def getStates(data):
+    states = []
+    for line in data[1:]:
+        state = line[1]
+        assert state not in states
+        states.append(state)
+    return states
+def getVocabulary(data):
+    vocabulary = []
+    line = data[0][2:]
+    for symbol in line:
+        assert len(symbol) == 1 and symbol not in vocabulary
+        vocabulary.append(symbol)
+    return vocabulary
+def getInitialState(data):
+    return data[1][1]
+def getFinalState(data):
+    finalStates = []
+    for line in data[1:]:
+        if len(line[0])>0:
+            finalStates.append(line[1])
+    return finalStates
