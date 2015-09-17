@@ -6,8 +6,8 @@ Automata simulator written in Python
 * Determine whether given input is accepted.
 
 ## Supported automata types
-* Deterministic Finite Automata
-* Deterministic Finite Automata with partial function
+* Deterministic finite automata
+* Deterministic ainite automata with partial function
 
 ## How to use
 
