@@ -1,10 +1,15 @@
 __author__ = 'Hyunsoo'
 
+import re
+ValidPattern = re.compile("^[a-zA-Z_][a-zA-Z0-9_]*$")
+
+def isValidStateName(name):
+    return ValidPattern.match(name) is not None
 def getStates(data):
     states = []
     for line in data[1:]:
         state = line[1]
-        assert state not in states
+        assert isValidStateName(state) and state not in states
         states.append(state)
     return states
 def getVocabulary(data):
