@@ -2,12 +2,12 @@
 
 __author__ = 'Hyunsoo'
 
-from automata.dfa import DFA
+from automata.automata import NFA
 
 if __name__ == "__main__":
-    dfa = DFA('automata.csv')
+    nfa = NFA('automata.csv')
     string = input(">> ")
-    accepted = dfa.match(string)
+    accepted = nfa.match(string)
     if accepted:
         print("네")
     else:
