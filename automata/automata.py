@@ -27,6 +27,6 @@ class NFA():
         initialStates = [self.initialState]
         finalStates = self.transition(initialStates, string)
         for state in finalStates:
-            if state in self.states:
+            if state in self.finalState:
                 return True
         return False
