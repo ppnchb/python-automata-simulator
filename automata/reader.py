@@ -33,5 +33,6 @@ def getTransitionTable(data):
         for column in range(1, len(table[0])):
             string = table[row][column]
             dest = re.split('\s+', string)
+            dest = [item for item in dest if isValidStateName(item)]
             table[row][column] = dest
     return table
