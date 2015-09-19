@@ -27,3 +27,11 @@ def getFinalState(data):
         if len(line[0])>0:
             finalStates.append(line[1])
     return finalStates
+def getTransitionTable(data):
+    table = [line[1:] for line in data]
+    for row in range(1, len(table)):
+        for column in range(1, len(table[0])):
+            string = table[row][column]
+            dest = re.split('\s+', string)
+            table[row][column] = dest
+    return table

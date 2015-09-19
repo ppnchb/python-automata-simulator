@@ -3,7 +3,7 @@ __author__ = 'Hyunsoo'
 from automata.reader import *
 from automata.transition import Transition
 
-class DFA():
+class NFA():
     def __init__(self, file=""):
         self.states = []
         self.vocabulary = []
@@ -24,12 +24,9 @@ class DFA():
         self.finalState = getFinalState(data)
 
     def match(self, string):
-        currentState = self.initialState
-        for symbol in string:
-            if symbol not in self.vocabulary:
-                return False
-            nextState = self.transition(currentState, symbol)
-            if nextState is None:
-                return False
-            currentState = nextState
-        return currentState in self.finalState
+        initialStates = [self.initialState]
+        finalStates = self.transition(initialStates, string)
+        for state in finalStates:
+            if state in self.states:
+                return True
+        return False
