@@ -26,9 +26,10 @@ class Transition():
     def symbolTransition(self, states, symbol):
         result = []
         for state in states:
-            row = self.vocabulary.index(symbol) + 1
-            column = self.states.index(state) + 1
-            result.extend(self.table[row][column])
+            row = self.states.index(state) + 1
+            column = self.vocabulary.index(symbol) + 1
+            nextStates = [item for item in self.table[row][column] if item not in result]
+            result.extend(nextStates)
         return result
 
     def initialize(self, data):
