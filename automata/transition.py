@@ -18,10 +18,12 @@ class Transition():
         return self.callRoutine(states, string)
 
     def callRoutine(self, states, string):
-        if string == '':
-            return states
-        prevStates = self.callRoutine(states, string[:-1])
-        return self.symbolTransition(prevStates, string[-1])
+        currentState = states[:]
+        inputString = string
+        while len(inputString)>0:
+            symbol, inputString = inputString[0], inputString[1:]
+            currentState = self.symbolTransition(currentState, symbol)
+        return currentState
 
     def symbolTransition(self, states, symbol):
         result = []
