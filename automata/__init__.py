@@ -1,3 +1,3 @@
 __author__ = 'Hyunsoo'
 
-__all__ = ['dfa']
+__all__ = ['automata']
