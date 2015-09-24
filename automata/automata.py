@@ -63,3 +63,14 @@ class MealyMachine:
         self.inputVocabulary = getVocabulary(data)
         self.transition = Transition(getPartialData(data, 1))
         self.outputFunction = SVFunction(getPartialData(data, 0))
+
+
+class InstantMealyMachine(MealyMachine):
+    def __init__(self, file=""):
+        super().__init__(file)
+        self.currentState = self.initialState
+
+    def __call__(self, symbol):
+        output = self.outputFunction(self.currentState, symbol)
+        self.currentState = self.transition(self.currentState, symbol)
+        return output
