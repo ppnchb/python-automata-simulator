@@ -71,6 +71,7 @@ class InstantMealyMachine(MealyMachine):
         self.currentState = self.initialState
 
     def __call__(self, symbol):
+        assert symbol in self.inputVocabulary
         output = self.outputFunction(self.currentState, symbol)
         self.currentState = self.transition(self.currentState, symbol)
         return output
