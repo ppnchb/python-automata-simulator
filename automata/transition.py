@@ -2,46 +2,56 @@ __author__ = 'Hyunsoo'
 
 from automata.reader import *
 
-class Transition():
+
+class SVFunction:
     def __init__(self, data=None):
         self.states = []
         self.vocabulary = []
-        self.table = None
+        self.table = []
         if data is not None:
             self.initialize(data)
 
-    def __call__(self, states, string):
-        for symbol in string:
-            assert symbol in self.vocabulary
-        for state in states:
-            assert state in self.states
-        return self.callRoutine(states, string)
-
-    def callRoutine(self, states, string):
-        currentState = states[:]
-        inputString = string
-        while len(inputString)>0:
-            symbol, inputString = inputString[0], inputString[1:]
-            currentState = self.symbolTransition(currentState, symbol)
-        return currentState
-
-    def symbolTransition(self, states, symbol):
-        result = []
-        for state in states:
-            row = self.states.index(state) + 1
-            column = self.vocabulary.index(symbol) + 1
-            nextStates = [item for item in self.table[row][column] if item not in result]
-            result.extend(nextStates)
-        return result
+    def __call__(self, state, symbol):
+        assert symbol in self.vocabulary
+        assert state in self.states
+        row = self.states.index(state)+1
+        column = self.vocabulary.index(symbol)+1
+        return self.table[row][column]
 
     def initialize(self, data):
         states = getStates(data)
         vocabulary = getVocabulary(data)
-        table = getTransitionTable(data)
-        assert self.isValidTransition(states, table)
+        table = getTable(data)
         self.states = states
         self.vocabulary = vocabulary
         self.table = table
+
+
+class Transition(SVFunction):
+    def determine(self, states, string):
+        for symbol in string:
+            assert symbol in self.vocabulary
+        for state in states:
+            assert state in self.states
+        currentState = states[:]
+        inputString = string
+        while len(inputString)>0:
+            symbol, inputString = inputString[0], inputString[1:]
+            nextState = []
+            for state in currentState:
+                result = self.__call__(state, symbol)
+                nextState += [state for state in result if state not in nextState]
+            currentState = nextState
+        return currentState
+
+    def initialize(self, data):
+        super().initialize(data)
+        for row in range(1, len(self.table)):
+            for column in range(1, len(self.table[0])):
+                item = self.table[row][column]
+                self.table[row][column] = [state for state in re.split('\s+', item) if state!='']
+        assert self.isValidTransition(self.states, self.table)
+
 
     def isValidTransition(self, states, table):
         for line in table[1:]:
