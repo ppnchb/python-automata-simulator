@@ -25,7 +25,7 @@ class NFA():
 
     def match(self, string):
         initialStates = [self.initialState]
-        finalStates = self.transition(initialStates, string)
+        finalStates = self.transition.determine(initialStates, string)
         for state in finalStates:
             if state in self.finalState:
                 return True
