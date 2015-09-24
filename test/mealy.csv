@@ -1,0 +1,4 @@
+Mealy,,0,1
+,a,a0; b,a1; b
+,b,b0; a,b1; c
+,c,c0; a,c1; c

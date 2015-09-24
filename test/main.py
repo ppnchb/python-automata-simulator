@@ -2,13 +2,10 @@
 
 __author__ = 'Hyunsoo'
 
-from automata.automata import NFA
+from automata.automata import MealyMachine
 
 if __name__ == "__main__":
-    nfa = NFA('automata.csv')
+    machine = MealyMachine('mealy.csv')
     string = input(">> ")
-    accepted = nfa.match(string)
-    if accepted:
-        print("네")
-    else:
-        print("아니요")
+    output = machine(string)
+    print(output)
