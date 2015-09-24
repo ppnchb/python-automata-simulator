@@ -27,12 +27,15 @@ def getFinalState(data):
         if len(line[0])>0:
             finalStates.append(line[1])
     return finalStates
-def getTransitionTable(data):
+def getTable(data):
     table = [line[1:] for line in data]
-    for row in range(1, len(table)):
-        for column in range(1, len(table[0])):
-            string = table[row][column]
-            dest = re.split('\s+', string)
-            dest = [item for item in dest if isValidStateName(item)]
-            table[row][column] = dest
     return table
+def getPartialData(data, index):
+    height, width = len(data), len(data[0])
+    result = [row[:] for row in data]
+    for row in range(1, height):
+        for column in range(2, width):
+            tableData = re.split(';\s+', result[row][column])
+            assert len(tableData)>index
+            result[row][column]=tableData[index]
+    return result
