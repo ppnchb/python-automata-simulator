@@ -47,6 +47,7 @@ class MealyMachine:
         self.outputFunction = Transition()
         if len(file)>0:
             self.setParameter(file)
+            self.initialize()
 
     def initialize(self):
         self.currentState = self.initialState
