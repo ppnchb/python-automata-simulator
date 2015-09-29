@@ -28,22 +28,6 @@ class SVFunction:
 
 
 class Transition(SVFunction):
-    def determine(self, states, string):
-        for symbol in string:
-            assert symbol in self.vocabulary
-        for state in states:
-            assert state in self.states
-        currentState = states[:]
-        inputString = string
-        while len(inputString)>0:
-            symbol, inputString = inputString[0], inputString[1:]
-            nextState = []
-            for state in currentState:
-                result = self.__call__(state, symbol)
-                nextState += [state for state in result if state not in nextState]
-            currentState = nextState
-        return currentState
-
     def initialize(self, data):
         super().initialize(data)
         for row in range(1, len(self.table)):
