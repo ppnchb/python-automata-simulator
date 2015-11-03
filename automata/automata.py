@@ -3,7 +3,7 @@ __author__ = 'Hyunsoo'
 from automata.reader import *
 from automata.transition import *
 
-class NFA():
+class NFA:
     def __init__(self, file=""):
         self.states = []
         self.finalState = []
