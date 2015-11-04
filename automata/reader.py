@@ -16,7 +16,7 @@ def getVocabulary(data):
     vocabulary = []
     line = data[0][2:]
     for symbol in line:
-        assert len(symbol) == 1 and symbol not in vocabulary
+        assert len(symbol) <= 1 and symbol not in vocabulary
         vocabulary.append(symbol)
     return vocabulary
 def getInitialState(data):

@@ -44,3 +44,16 @@ class Transition(SVFunction):
                     if state not in states:
                         return False
         return True
+
+    def epsilonClosure(self, state):
+        assert state in self.states
+        if '' not in self.vocabulary:
+            return [state]
+        result = []
+        iteration = [state]
+        while result != iteration:
+            result = iteration[:]
+            for element in result:
+                temp = [s for s in self.__call__(element, '') if s not in iteration]
+                iteration.extend(temp)
+        return result

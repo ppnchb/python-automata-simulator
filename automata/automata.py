@@ -26,13 +26,16 @@ class NFA:
         self.finalState = getFinalState(data)
 
     def initialize(self):
-        self.currentState = [self.initialState]
+        self.currentState = self.transition.epsilonClosure(self.initialState)
 
     def __call__(self, symbol):
         assert type(symbol) is str and len(symbol)==1
         nextState = []
         for state in self.currentState:
-            temp = [state for state in self.transition(state, symbol) if state not in nextState]
+            temp = [s for s in self.transition(state, symbol) if s not in nextState]
+            nextState.extend(temp)
+        for state in nextState:
+            temp = [s for s in self.transition.epsilonClosure(state) if s not in nextState]
             nextState.extend(temp)
         self.currentState = nextState
 
