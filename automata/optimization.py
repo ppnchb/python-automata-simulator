@@ -101,8 +101,7 @@ def minimizedDFA(dfa):
     equivalencePartition = list(range(numState))
     while len(totalStates) > 0:
         stateIndex = totalStates.pop(0)
-        equivalentStates = [stateIndex] + \
-                           [i for i in range(stateIndex+1, numState) if equivalenceTable[stateIndex][i] == 0]
+        equivalentStates = [stateIndex] + [i for i in range(stateIndex+1, numState) if equivalenceTable[stateIndex][i] == 0]
         for index in equivalentStates[1:]:
             totalStates.remove(index)
             equivalencePartition[index] = stateIndex
