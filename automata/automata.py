@@ -29,7 +29,7 @@ class NFA:
         self.currentState = [self.initialState]
 
     def __call__(self, symbol):
-        assert symbol is str and len(symbol)==1
+        assert type(symbol) is str and len(symbol)==1
         nextState = []
         for state in self.currentState:
             temp = [state for state in self.transition(state, symbol) if state not in nextState]
