@@ -12,13 +12,15 @@ class NFA:
         self.vocabulary = []
         self.transition = Transition()
         if len(file)>0:
-            self.setParameter(file)
+            self.setParameterFromFile(file)
             self.initialize()
 
-    def setParameter(self, path):
+    def setParameterFromFile(self, path):
         file = open(path, 'r')
         data = [line.split(',') for line in file.read().split('\n')[:-1]]
+        self.setParameter(data)
 
+    def setParameter(self, data):
         self.states = getStates(data)
         self.vocabulary = getVocabulary(data)
         self.transition = Transition(data)
