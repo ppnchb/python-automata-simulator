@@ -36,6 +36,12 @@ class NFA:
             nextState.extend(temp)
         self.currentState = nextState
 
+    def isAccepted(self):
+        for state in self.currentState:
+            if state in self.finalState:
+                return True
+        return False
+
 
 class MealyMachine:
     def __init__(self, file=""):
