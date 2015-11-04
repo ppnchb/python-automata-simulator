@@ -45,6 +45,15 @@ class NFA:
                 return True
         return False
 
+    def saveConfiguration(self, path):
+        filepath = path + ('.csv' if path[-4:] != '.csv' else '')
+        file = open(filepath, 'w')
+        file.write(',,'+','.join(self.vocabulary)+'\n')
+        for row in self.transition.table[1:]:
+            modifiedRow = [item if type(item) is str else ' '.join(item) for item in row]
+            finalStateNotation = '*,' if modifiedRow[0] in self.finalState else ','
+            file.write(finalStateNotation+','.join(modifiedRow)+'\n')
+        file.close()
 
 class MealyMachine:
     def __init__(self, file=""):
